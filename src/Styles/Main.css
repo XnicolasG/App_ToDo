@@ -1,0 +1,49 @@
+.Main{
+    display: grid;
+    grid-column: 1/ span 2;
+    grid-template-rows: 1.5fr 2fr 1fr;
+}
+/* Header */
+.Header{
+    background-image: url('https://preview.redd.it/animated-wallpaper-1920-1080-v0-mthr3x0q3m091.png?auto=webp&s=9c853c670b3538bcfc9a54565abd25623bc50052') ;
+    background-size:75rem;
+    background-position: center;
+    display: grid;
+    grid-template-columns: 2fr 1.5fr;
+    grid-row: 1 / 2;
+}
+
+/* ToDoDate */
+.DateContainer{
+    display: grid;
+    grid-column: 2/3;
+    grid-template-columns: 1fr .5fr;
+}
+.DateInfo{
+    display: grid;
+    align-content: center;
+    align-items: center;
+    grid-template-rows: 3rem 5rem 3rem;
+    color: #eee;
+    gap: 4px;
+}
+.DayName{
+    grid-row: 1 / 2;
+    font-weight: lighter;
+    font-size: 20px;
+}
+.Day{
+    grid-row: 2/3;
+    font-size: 42px;
+}
+.Month{
+    grid-row: 3/4;
+    font-weight: lighter;
+}
+.DateAside{
+    
+}
+/* StartButton */
+.StartButton{
+
+}

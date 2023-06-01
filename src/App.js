@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+
+import StartButton from './Components/StartButton';
+import ToDoAside from './Components/ToDoAside';
+import ToDoDate from './Components/ToDoDate';
+import ToDoHeader from './Components/ToDoHeader';
+import ToDoMain from './Components/ToDoMain';
+import useTodos from './Hooks/useTodos';
+import './Styles/App.css';
 
 function App() {
+  const {dateIcon, setDateIcon} = useTodos();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section
+      className='container'>
+        <ToDoMain>
+            <ToDoHeader>
+              <ToDoDate 
+              dateIcon={dateIcon}
+              setDateIcon={setDateIcon}
+              />
+            </ToDoHeader>
+            <StartButton />
+        </ToDoMain>
+         
+        <ToDoAside>
+
+        </ToDoAside>
+      </section>
+
+
     </div>
   );
 }
