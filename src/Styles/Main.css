@@ -1,7 +1,17 @@
+:root{
+    --button: #3FB29F;
+    --mainBackground: #2f2f3d;
+}
 .Main{
     display: grid;
     grid-column: 1/ span 2;
     grid-template-rows: 1.5fr 2fr 1fr;
+    background-color: var(--mainBackground);
+    transition: all 1s;
+}
+.StartedMain{
+    transition: all 1s;
+    grid-column: 1;
 }
 /* Header */
 .Header{
@@ -41,9 +51,20 @@
     font-weight: lighter;
 }
 .DateAside{
-    
+    display: grid;
+    place-items: center;   
 }
+
 /* StartButton */
 .StartButton{
-
+    grid-row: 3 / 4;
+    width: 150px;
+    height: 60px;
+    display: flex;
+    place-self: center;
+    place-content: center;
+    background-color: var(--button);
+    color: #eee;
+    border-radius: 20px;
+    border: none;
 }

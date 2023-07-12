@@ -5,7 +5,7 @@ body{
 }
 .App {
   text-align: center;
-  background-image: url('https://rare-gallery.com/mocahbig/50534-Artistic-Landscape-4k-Ultra-HD-Wallpaper.jpg');
+  background-image: url('https://wallpapers.com/images/hd/minimalist-nature-3840-x-2160-e91sxvrut8sj83hr.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -21,6 +21,5 @@ body{
   width: 75rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows:650px ; 
 }
-

@@ -1,3 +1,45 @@
+:root{
+    --darkShadow:#646567;
+    --lightShadow:#c0bdbd6a;
+    --lightGreen: #46d4ed;
+    --secondGreen: #3ecd9e;
+  }
 .Aside{
-    
+    /* Background */
+    background-color: #e3dcdc6a;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+
+    padding: 2%;
+    /* Grid */
+    display: grid;
+    grid-template-rows:80px 2fr ;
+}
+
+.contSearch{
+    padding: 5px;
+    display: grid;
+    justify-content: center;
+    margin-bottom: 4%;
+}
+.searching{
+    width: 300px;
+  min-height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ffffff;
+  padding: 2%;
+  font-size: 20px;
+  border: #e3dcdc6a 4px solid;
+  outline: none;
+  background: transparent;
+  transition: all 1s ease;
+}
+.searching::placeholder{
+    text-align: center;
+}
+
+.searching:focus{
+    border: transparent 4px solid;
+    box-shadow: inset 1px 5px 8px var(--darkShadow), inset -27.93px -27.93px 20px var(--lightShadow);
 }

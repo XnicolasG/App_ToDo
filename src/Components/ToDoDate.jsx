@@ -1,16 +1,13 @@
 import React from 'react'
 import '../Styles/Main.css'
 
-const ToDoDate = ({dateIcon, setDateIcon}) => {
+const ToDoDate = ({ dateIcon }) => {
     const date = new Date();
     const day = date.getDate();
-    const dayType = {weekday: 'long'}
+    const dayType = { weekday: 'long' }
     const dayName = date.toLocaleDateString('es-Es', dayType);
-    const monthType = {month: 'long'}
-    const monthName =date.toLocaleDateString('es-Es', monthType).toUpperCase();
-    const Hour = date.getHours();
-
-    Hour 
+    const monthType = { month: 'long' }
+    const monthName = date.toLocaleDateString('es-Es', monthType).toUpperCase();
 
     return (
         <section className='DateContainer'>
@@ -21,7 +18,7 @@ const ToDoDate = ({dateIcon, setDateIcon}) => {
 
             </main>
             <aside className='DateAside'>
-            <img src="" alt="icon" />
+                <img className='dateIcon' src={dateIcon} alt="dateIcon" />
             </aside>
         </section>
     )
