@@ -2,10 +2,11 @@ import React from 'react'
 import '../Styles/Aside.css'
 
 
-const ToDoSearch = () => {
+const ToDoSearch = ({search, setSearch}) => {
   
     const OnSearch = (e) =>{
         console.log(e.target.value);
+        setSearch(e.target.value)
     }
     return (
     <div className='contSearch'>
@@ -13,6 +14,7 @@ const ToDoSearch = () => {
         className="searching" 
         placeholder="Buscar tarea"
         onChange={OnSearch}
+        value={search}
         /> 
     </div>
   )

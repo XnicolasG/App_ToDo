@@ -9,30 +9,46 @@ import useTodos from './Hooks/useTodos';
 import './Styles/App.css';
 
 function App() {
-  const {dateIcon, start , setStart} = useTodos();
+  const {
+    dateIcon,
+    start,
+    setStart,
+    loading,
+    error,
+    search,
+    setSearch,
+    completeToDo,
+    completedToDos,
+    totalToDos,
+    searchedTodo,
+    deleteToDo,
+    addTodo
+  } = useTodos();
   return (
     <div className="App">
       <section
-      className='container'>
+        className='container'>
         <ToDoMain
-        start ={start}
+          start={start}
         >
-            <ToDoHeader>
-              <ToDoDate 
+          <ToDoHeader>
+            <ToDoDate
               dateIcon={dateIcon}
-              />
-            </ToDoHeader>
-            <StartButton 
-            start = {start}
-            setStart = {setStart}
             />
+          </ToDoHeader>
+
+          <StartButton
+            start={start}
+            setStart={setStart}
+          />
         </ToDoMain>
-         
+
         <ToDoAside>
           <ToDoSearch
-          
-          
+            search={search}
+            setSearch={setSearch}
           />
+          
         </ToDoAside>
       </section>
 

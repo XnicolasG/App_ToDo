@@ -23,12 +23,14 @@ const useTodos = (props) => {
     }
   }, [Hour]);
   
-  //----- contador de ToDos
+  //----- contador de ToDos --
+
   //!! se niega la negación sin embargo esto garantiza estar trabajando con valor bool puro y que no traiga otro tipo de valor y genere errores
   const completedToDos = item.filter(todo => !!todo.completed).length;
   const totalToDos = item.length;
 
-  // --- Metodo para filtrar por medio del buscador
+  // --- Metodo para filtrar por medio del buscador ---
+
   let searchedTodo = [];
 
   //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
@@ -46,12 +48,54 @@ const useTodos = (props) => {
     })
   }
 
+// --- CRUD ---
+const addTodo = (text) =>{
+  // clonar array item
+  const newToDo = [...item]
+  newToDo.push({
+    completed: false,
+    text,
+  })
+  SaveItem(newToDo)
+}
 
+const completeToDo = (text) =>{
+  //iteracion en item hasta encontrarla coincidencia exacta de text que busco y asi obtener el index
+  const toDoIndex = item.findIndex(todo => todo.text === text);
+  const newToDo = [...item];
+  if (!newToDo[toDoIndex].completed == true) {
+      newToDo[toDoIndex].completed = true;
+
+      //actualizar el estado y pasarlo a true
+      SaveItem(newToDo);
+  } else {
+    newToDo[toDoIndex].completed = false;
+    SaveItem(newToDo);
+  }
+}
+
+const deleteToDo = (text) => {
+  const toDoIndex = item.findIndex(todo => todo.text === text);
+  const newToDo = [...item];
+  // corto la posición guardada en toDoIndex, y le digo que solo quiero cortar 1 elemento
+  newToDo.splice(toDoIndex, 1)
+  SaveItem(newToDo);
+}
 
   return {
     dateIcon,
     start,
-    setStart
+    setStart,
+    loading,
+    error,
+    search,
+    setSearch,
+    completeToDo,
+    completedToDos,
+    totalToDos,
+    searchedTodo,
+    deleteToDo,
+    addTodo
   };
 }
 
