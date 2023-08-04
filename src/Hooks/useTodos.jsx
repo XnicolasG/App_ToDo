@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
+import useLocalStorage from './useLocalStorage'
 
-const useTodos = () => {
+const useTodos = (props) => {
+
+  const {item, SaveItem, loading, error} = useLocalStorage('ToDO_List', [])
+
   const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
   const date = new Date();
   const Hour = date.getHours();
-  useEffect(() => {
 
+  const [search, setSearch] = useState('');
+  
+  //--- Header ---
+  useEffect(() => {
     if (Hour < 12) {
       setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657211/1888282_obdvdr.png');
     } else if (Hour < 18) {
@@ -14,7 +21,32 @@ const useTodos = () => {
     } else {
       setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657146/7645197_zd91ht.png');
     }
-  }, [Hour])
+  }, [Hour]);
+  
+  //----- contador de ToDos
+  //!! se niega la negación sin embargo esto garantiza estar trabajando con valor bool puro y que no traiga otro tipo de valor y genere errores
+  const completedToDos = item.filter(todo => !!todo.completed).length;
+  const totalToDos = item.length;
+
+  // --- Metodo para filtrar por medio del buscador
+  let searchedTodo = [];
+
+  //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
+  if (!search.length >= 1) {
+    searchedTodo = item
+ // pero si SI es mayor o igual a 1..   
+  } else {
+    searchedTodo = item.filter(todo => {
+      // pasar string la lista de ToDos a minuscula
+      const todoText = todo.text.toLowerCase();
+      // pasar a minuscula el string en el input de busqueda
+      const searchText = search.toLowerCase();
+      // devolver el valor DENTRO de item que incluya alguna coincidencia con la busqueda, asi sea de una sola letra
+      return todoText.includes(searchText);
+    })
+  }
+
+
 
   return {
     dateIcon,
