@@ -43,3 +43,85 @@
     border: transparent 4px solid;
     box-shadow: inset 1px 5px 8px var(--darkShadow), inset -27.93px -27.93px 20px var(--lightShadow);
 }
+
+/* To Do Item */
+.contItem{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 4%;
+    width: 400px;
+    min-height: 65px;
+    padding: 2%;
+    font-size: 1.2rem;
+    font-weight: 500;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    transition: all 1s ease;
+  }
+  .contItem:hover{
+    transform: scale(1.02);
+    box-shadow: 2px 2px 6px #5f626694, -8px -8px 10px  #c5c5c56a;
+    border-radius: 10px;
+    transition: transform 2s ease-out ;
+  }
+  .contItem input[type="checkbox"]{
+    cursor: pointer;
+    transform: scale(1.5);
+    accent-color: rgb(40, 141, 40);
+  }
+  .toDoCheck{
+    text-decoration: none;
+  }
+  .toDoUndo{
+    text-decoration: line-through;
+  }
+  .eraseItem{
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .eraseItem:hover{
+    color: tomato;
+  }
+/* To Do List */
+
+/* To Do Loader */
+.loader-container{
+    max-width: 400px;
+    padding: 2%;
+    background: transparent;
+  }
+  .loader{
+    background: transparent;
+    background: linear-gradient(to right, var(--backGround) 8%, #dddddd 18%, var(--backGround) 42%);
+    display: flex;
+    align-items: center;
+    gap: 4%;
+    min-height: 60px;
+    padding: 2%;
+    animation-name: loaderAnimation;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  @keyframes loaderAnimation {
+    0%{
+      background-position: -400px
+    }
+    100%{
+      background-position: 400px
+    }
+  }
+  .circle{
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    background: #d7e2e6;
+  }
+  .rectangle{
+    height: 25px;
+    width: 400px;
+    background: #d7e2e6;
+  }

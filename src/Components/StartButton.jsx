@@ -4,7 +4,6 @@ import '../Styles/Main.css'
 
 const StartButton = ({start , setStart}) => {
   const handleClick = () =>{
-
     setStart(start ? false : true)
     console.log('doy click');
   }

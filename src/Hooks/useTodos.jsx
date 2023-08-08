@@ -1,9 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react'
 import useLocalStorage from './useLocalStorage'
 
 const useTodos = (props) => {
 
-  const {item, SaveItem, loading, error} = useLocalStorage('ToDO_List', [])
+  const { item, SaveItem, loading, error } = useLocalStorage('TODOS_V1', [])
 
   const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
@@ -11,7 +12,7 @@ const useTodos = (props) => {
   const Hour = date.getHours();
 
   const [search, setSearch] = useState('');
-  
+
   //--- Header ---
   useEffect(() => {
     if (Hour < 12) {
@@ -22,7 +23,7 @@ const useTodos = (props) => {
       setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657146/7645197_zd91ht.png');
     }
   }, [Hour]);
-  
+
   //----- contador de ToDos --
 
   //!! se niega la negación sin embargo esto garantiza estar trabajando con valor bool puro y que no traiga otro tipo de valor y genere errores
@@ -36,7 +37,7 @@ const useTodos = (props) => {
   //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
   if (!search.length >= 1) {
     searchedTodo = item
- // pero si SI es mayor o igual a 1..   
+    // pero si SI es mayor o igual a 1..   
   } else {
     searchedTodo = item.filter(todo => {
       // pasar string la lista de ToDos a minuscula
@@ -48,39 +49,44 @@ const useTodos = (props) => {
     })
   }
 
-// --- CRUD ---
-const addTodo = (text) =>{
-  // clonar array item
-  const newToDo = [...item]
-  newToDo.push({
-    completed: false,
-    text,
-  })
-  SaveItem(newToDo)
-}
+  // --- CRUD ---
+  
+  const addTodo = (text) => {
+    // clonar array item
+    const newToDo = [...item]
+    const newId = uuidv4();
+    newToDo.push({
+      id: newId,
+      completed: false,
+      text,
+    })
+    console.log(newId);
+    SaveItem(newToDo)
+  }
 
-const completeToDo = (text) =>{
-  //iteracion en item hasta encontrarla coincidencia exacta de text que busco y asi obtener el index
-  const toDoIndex = item.findIndex(todo => todo.text === text);
-  const newToDo = [...item];
-  if (!newToDo[toDoIndex].completed == true) {
+  const completeToDo = (text) => {
+    //iteracion en item hasta encontrarla coincidencia exacta de text que busco y asi obtener el index
+    const toDoIndex = item.findIndex(todo => todo.text === text);
+    const newToDo = [...item];
+    if (newToDo[toDoIndex].completed === false) {
       newToDo[toDoIndex].completed = true;
+      console.log("si funciona");
 
       //actualizar el estado y pasarlo a true
       SaveItem(newToDo);
-  } else {
-    newToDo[toDoIndex].completed = false;
+    } else {
+      newToDo[toDoIndex].completed = false;
+      SaveItem(newToDo);
+    }
+  }
+  
+  const deleteToDo = (text) => {
+    const toDoIndex = item.findIndex(todo => todo.text === text);
+    const newToDo = [...item];
+    // corto la posición guardada en toDoIndex, y le digo que solo quiero cortar 1 elemento
+    newToDo.splice(toDoIndex, 1)
     SaveItem(newToDo);
   }
-}
-
-const deleteToDo = (text) => {
-  const toDoIndex = item.findIndex(todo => todo.text === text);
-  const newToDo = [...item];
-  // corto la posición guardada en toDoIndex, y le digo que solo quiero cortar 1 elemento
-  newToDo.splice(toDoIndex, 1)
-  SaveItem(newToDo);
-}
 
   return {
     dateIcon,
@@ -95,7 +101,7 @@ const deleteToDo = (text) => {
     totalToDos,
     searchedTodo,
     deleteToDo,
-    addTodo
+    addTodo,
   };
 }
 
