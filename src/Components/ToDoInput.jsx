@@ -17,6 +17,7 @@ const ToDoInput = ({ setStart, start,addTodo }) => {
             return
         } else {
             addTodo(newTodo) // enviado estado a funcion addTodo
+            setNewTodo("")
             setWarning('disable')
         }
     }
@@ -30,7 +31,7 @@ const ToDoInput = ({ setStart, start,addTodo }) => {
                     onChange={onchange}
                     value={newTodo}
                 />
-                <p className={warning}>
+                <p className={warning==="disable" ? 'noneDisplay' : "withDisplay"}>
                     Escribe alguna tarea para poder agregar
                 </p>
                 <section className='contButtons'>

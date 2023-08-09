@@ -1,5 +1,3 @@
-
-import StartButton from './Components/StartButton';
 import ToDoAside from './Components/ToDoAside';
 import ToDoDate from './Components/ToDoDate';
 import ToDoEmpty from './Components/ToDoEmpty';
@@ -28,8 +26,6 @@ function App() {
     searchedTodo,
     deleteToDo,
     addTodo,
-    setNewToDo,
-    newToDo
   } = useTodos();
   return (
     <div className="App">
@@ -38,7 +34,10 @@ function App() {
         <ToDoMain
           start={start}
         >
-          <ToDoHeader>
+          <ToDoHeader
+            totalToDos={totalToDos}
+            completedToDos={completedToDos}
+          >
             <ToDoDate
               dateIcon={dateIcon}
             />
@@ -62,19 +61,19 @@ function App() {
             searchedTodo={searchedTodo}
             search={search}
             //render functions
-            onError={() => <p>Se Genero un Error</p>}
+            onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
               <ToDoLoader key={index} />
             ))}
-            onEmpty={() => <ToDoEmpty />}
+            onEmpty={() => <ToDoEmpty />} // FALTAN ESTILOS PARA EMPTY
             onEmptyResults={(search) => <p>No encontramos coincidencia alguna con "{search}</p>}
             onRender={todo => (
               <ToDoItem
                 key={todo.id}
                 text={todo.text}
                 completed={todo.completed}
-                OnComplete={() => { completeToDo(todo.id) }}
-                onDelete={() => { deleteToDo(todo.id) }}
+                OnComplete={() => { completeToDo(todo.text) }}
+                onDelete={() => { deleteToDo(todo.text) }}
               />
             )}
           />

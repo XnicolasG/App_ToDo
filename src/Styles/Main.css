@@ -76,6 +76,14 @@
     outline: none;
 
 }
+/* warning message */
+.noneDisplay{
+    visibility: hidden!important;
+}
+.withDisplay{
+    visibility: visible ;
+    color: tomato;
+}
 /* StartButton */
 .contButtons{
     display: grid;
@@ -93,4 +101,11 @@
     color: #eee;
     border-radius: 20px;
     border: none;
+    transition: all .5s;
+}
+.StartButton:hover{
+    background-color: rgb(91, 144, 190);
+}
+.StartButton:active{
+    background-color: #1dc962;
 }
