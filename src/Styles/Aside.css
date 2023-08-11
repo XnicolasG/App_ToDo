@@ -35,6 +35,9 @@
   background: transparent;
   transition: all 1s ease;
 }
+.searching:disabled{
+  border: #e45e70ac 4px solid ;
+}
 .searching::placeholder{
     text-align: center;
 }

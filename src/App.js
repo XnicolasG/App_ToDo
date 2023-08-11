@@ -37,6 +37,7 @@ function App() {
           <ToDoHeader
             totalToDos={totalToDos}
             completedToDos={completedToDos}
+            loading={loading}
           >
             <ToDoDate
               dateIcon={dateIcon}
@@ -49,24 +50,29 @@ function App() {
           />
         </ToDoMain>
 
-        <ToDoAside>
-          <ToDoSearch
+        <ToDoAside
             search={search}
+        >
+          <ToDoSearch
+            // search={search}
             setSearch={setSearch}
+            loading={loading}
           />
           <ToDoList
+          //render props
             error={error}
             loading={loading}
             totalToDos={totalToDos}
             searchedTodo={searchedTodo}
-            search={search}
-            //render functions
+            // search={search}
+            
             onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
               <ToDoLoader key={index} />
             ))}
             onEmpty={() => <ToDoEmpty />} // FALTAN ESTILOS PARA EMPTY
             onEmptyResults={(search) => <p>No encontramos coincidencia alguna con "{search}</p>}
+            
             onRender={todo => (
               <ToDoItem
                 key={todo.id}

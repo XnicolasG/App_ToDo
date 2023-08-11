@@ -2,7 +2,7 @@ import React from 'react'
 import '../Styles/Aside.css'
 
 
-const ToDoSearch = ({search, setSearch}) => {
+const ToDoSearch = ({search, setSearch, loading}) => {
   
     const OnSearch = (e) =>{
         console.log(e.target.value);
@@ -15,6 +15,7 @@ const ToDoSearch = ({search, setSearch}) => {
         placeholder="Buscar tarea"
         onChange={OnSearch}
         value={search}
+        disabled={loading}
         /> 
     </div>
   )

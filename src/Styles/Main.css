@@ -22,7 +22,9 @@
     grid-template-columns: 2fr 1.5fr;
     grid-row: 1 / 2;
 }
-
+.counterLoading{
+    opacity: 30%;
+}
 /* ToDoDate */
 .DateContainer{
     display: grid;
