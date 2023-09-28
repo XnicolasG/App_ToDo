@@ -1,3 +1,4 @@
+import { ChangeAlertWithStorage } from './Components/ChangeAlert';
 import ToDoAside from './Components/ToDoAside';
 import ToDoDate from './Components/ToDoDate';
 import ToDoEmpty from './Components/ToDoEmpty';
@@ -26,6 +27,7 @@ function App() {
     searchedTodo,
     deleteToDo,
     addTodo,
+    SyncToDo
   } = useTodos();
   return (
     <div className="App">
@@ -82,6 +84,9 @@ function App() {
                 onDelete={() => { deleteToDo(todo.text) }}
               />
             )}
+          />
+          <ChangeAlertWithStorage 
+            SyncToDo={SyncToDo}
           />
         </ToDoAside>
       </section>

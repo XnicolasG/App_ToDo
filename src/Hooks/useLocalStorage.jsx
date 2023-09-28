@@ -5,7 +5,8 @@ const useLocalStorage = (itemName ,initValue) => {
     const [loading, setLoading] = useState (true);
     //item sera el contener de todos los todos
     const [item, setItem] = useState(initValue);
-
+    const [sincronized, setSincronized] = useState(true)
+    
     useEffect(() =>{
       setTimeout(() =>{
         try {
@@ -23,12 +24,12 @@ const useLocalStorage = (itemName ,initValue) => {
           }
           setItem(ParsedItem)
           setLoading(false)
-
+          setSincronized(true)
         } catch (error) {
           setError(error)
         }
-      }, 3000)
-    })
+      }, 3000);
+    },[sincronized]);
 
     const SaveItem = (newToDo) =>{
       try {
@@ -40,11 +41,18 @@ const useLocalStorage = (itemName ,initValue) => {
         setError(error)
       }
     }
+
+    const SyncItem = () =>{
+      setLoading(true)
+      console.log('funciona func sync');
+      setSincronized(false)
+    }
   return {
     item,
     SaveItem,
     loading,
-    error
+    error,
+    SyncItem
   }
 }
 

@@ -4,7 +4,7 @@ import useLocalStorage from './useLocalStorage'
 
 const useTodos = (props) => {
 
-  const { item, SaveItem, loading, error } = useLocalStorage('TODOS_V1', [])
+  const { item, SaveItem, loading, error, SyncItem: SyncToDo } = useLocalStorage('TODOS_V1', [])
 
   const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
@@ -70,7 +70,7 @@ const useTodos = (props) => {
     const newToDo = [...item];
     if (newToDo[toDoIndex].completed === false) {
       newToDo[toDoIndex].completed = true;
-      console.log("si funciona");
+      // console.log("si funciona");
 
       //actualizar el estado y pasarlo a true
       SaveItem(newToDo);
@@ -102,6 +102,7 @@ const useTodos = (props) => {
     searchedTodo,
     deleteToDo,
     addTodo,
+    SyncToDo
   };
 }
 
