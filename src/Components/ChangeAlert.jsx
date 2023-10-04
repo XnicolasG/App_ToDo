@@ -1,17 +1,18 @@
 import React from 'react'
-import { withStorageListener } from '../HOC/withStorageListener'
+import { useStorageListener } from '../HOC/useStorageListener'
 
-const ChangeAlert = ({ show, setShow }) => {
+const ChangeAlert = ({SyncToDo}) => {
+  const {show, setShow} = useStorageListener(SyncToDo);
   if (show) {
     return (
-      <>
+      <div>
         <p>Hubo Cambios</p>
         <button
           onClick={setShow}
         >
           Volver a cargar To Dos
         </button>
-      </>
+      </div>
     )
   } else {
 
@@ -23,6 +24,6 @@ const ChangeAlert = ({ show, setShow }) => {
   // )
 }
 
-const ChangeAlertWithStorage = withStorageListener(ChangeAlert)
+// const ChangeAlertWithStorage = useStorageListener(ChangeAlert)
 
-export { ChangeAlertWithStorage }
+export { ChangeAlert }

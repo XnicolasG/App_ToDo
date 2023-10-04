@@ -1,4 +1,4 @@
-import { ChangeAlertWithStorage } from './Components/ChangeAlert';
+import { ChangeAlert } from './Components/ChangeAlert';
 import ToDoAside from './Components/ToDoAside';
 import ToDoDate from './Components/ToDoDate';
 import ToDoEmpty from './Components/ToDoEmpty';
@@ -73,7 +73,7 @@ function App() {
               <ToDoLoader key={index} />
             ))}
             onEmpty={() => <ToDoEmpty />} // FALTAN ESTILOS PARA EMPTY
-            onEmptyResults={(search) => <p>No encontramos coincidencia alguna con "{search}</p>}
+            onEmptyResults={(search) => <p>No encontramos coincidencia alguna con "{search}"</p>}
             
             onRender={todo => (
               <ToDoItem
@@ -85,7 +85,7 @@ function App() {
               />
             )}
           />
-          <ChangeAlertWithStorage 
+          <ChangeAlert 
             SyncToDo={SyncToDo}
           />
         </ToDoAside>

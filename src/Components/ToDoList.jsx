@@ -22,7 +22,8 @@ const ToDoList = (props) => {
         {!!props.totalToDos && !props.searchedTodo.length &&
           props.onEmptyResults(props.search)}
 
-        {props.searchedTodo.map(renderFunc)}
+        {/* Si loading y error son false entonces si renderizaremos los ToDo */}
+        {(!props.loading && !props.error) && props.searchedTodo.map(renderFunc)}
 
       </ul>
     </section>
