@@ -5,12 +5,13 @@ const ChangeAlert = ({SyncToDo}) => {
   const {show, setShow} = useStorageListener(SyncToDo);
   if (show) {
     return (
-      <div>
-        <p>Hubo Cambios</p>
+      <div className='contAlert'>
+        <p>Parece que hay algunos cambios en los To Do's</p>
         <button
+        className='buttonAlert'
           onClick={setShow}
         >
-          Volver a cargar To Dos
+          Actualizar !
         </button>
       </div>
     )

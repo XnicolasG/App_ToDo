@@ -53,28 +53,37 @@ function App() {
         </ToDoMain>
 
         <ToDoAside
-            search={search}
+          search={search}
         >
+          {totalToDos > 0 ?  
           <ToDoSearch
             // search={search}
             setSearch={setSearch}
             loading={loading}
           />
+          : <div></div>
+  }
           <ToDoList
-          //render props
+            //render props
             error={error}
             loading={loading}
             totalToDos={totalToDos}
             searchedTodo={searchedTodo}
             // search={search}
-            
+
             onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
               <ToDoLoader key={index} />
             ))}
             onEmpty={() => <ToDoEmpty />} // FALTAN ESTILOS PARA EMPTY
-            onEmptyResults={(search) => <p>No encontramos coincidencia alguna con "{search}"</p>}
-            
+            onEmptyResults={(search) =>
+              <div className='contEmpty'>
+                <p className='emptyMessage'>No encontramos coincidencia alguna con <span>"{search}"</span></p>
+                <div className='emptyImg'>
+                  <img alt='empty' src='https://res.cloudinary.com/dlkynkfvq/image/upload/v1696544445/query_xg1kug.png'/>
+                </div>
+              </div>
+            }
             onRender={todo => (
               <ToDoItem
                 key={todo.id}
@@ -85,7 +94,7 @@ function App() {
               />
             )}
           />
-          <ChangeAlert 
+          <ChangeAlert
             SyncToDo={SyncToDo}
           />
         </ToDoAside>
