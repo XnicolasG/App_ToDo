@@ -4,6 +4,7 @@ import '../Styles/Main.css'
 
 const ToDoMain = ({ children, start }) => {
     return (
+        // condiconal con window.matchMedia
         <div className={`Main ${start ? 'StartedMain' : ''}`}>
             {children}
         </div>
@@ -11,3 +12,6 @@ const ToDoMain = ({ children, start }) => {
 }
 
 export default ToDoMain
+// al estar por debajo de 800px dejar de tener grid dinamico,
+// dejar de tner boton de continuar, solo deplegarlo de manera vertical
+// desde un inicio

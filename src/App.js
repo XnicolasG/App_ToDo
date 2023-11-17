@@ -14,21 +14,27 @@ import './Styles/App.css';
 
 function App() {
   const {
-    dateIcon,
-    start,
-    setStart,
-    loading,
+    states, updaters
+  } = useTodos();
+  const {
     error,
+    loading,
     search,
-    setSearch,
+    searchedTodo,
     completeToDo,
     completedToDos,
     totalToDos,
-    searchedTodo,
-    deleteToDo,
+    start,
+    dateIcon,
+  } = states
+
+  const {
     addTodo,
-    SyncToDo
-  } = useTodos();
+    deleteToDo,
+    setSearch,
+    SyncToDo,
+    setStart,
+  } = updaters
   return (
     <div className="App">
       <section
