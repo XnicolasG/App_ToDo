@@ -61,14 +61,14 @@ function App() {
         <ToDoAside
           search={search}
         >
-          {totalToDos > 0 ?  
-          <ToDoSearch
-            // search={search}
-            setSearch={setSearch}
-            loading={loading}
-          />
-          : <div></div>
-  }
+          {totalToDos > 0 ?
+            <ToDoSearch
+              // search={search}
+              setSearch={setSearch}
+              loading={loading}
+            />
+            : <div></div>
+          }
           <ToDoList
             //render props
             error={error}
@@ -86,7 +86,7 @@ function App() {
               <div className='contEmpty'>
                 <p className='emptyMessage'>No encontramos coincidencia alguna con <span>"{search}"</span></p>
                 <div className='emptyImg'>
-                  <img alt='empty' src='https://res.cloudinary.com/dlkynkfvq/image/upload/v1696544445/query_xg1kug.png'/>
+                  <img alt='empty' src='https://res.cloudinary.com/dlkynkfvq/image/upload/v1696544445/query_xg1kug.png' />
                 </div>
               </div>
             }
@@ -105,8 +105,6 @@ function App() {
           />
         </ToDoAside>
       </section>
-
-
     </div>
   );
 }
