@@ -1,16 +1,16 @@
-import { ChangeAlert } from './Components/ChangeAlert';
-import ToDoAside from './Components/ToDoAside';
-import ToDoDate from './Components/ToDoDate';
-import ToDoEmpty from './Components/ToDoEmpty';
-import ToDoHeader from './Components/ToDoHeader';
-import ToDoInput from './Components/ToDoInput';
-import ToDoItem from './Components/ToDoItem';
-import ToDoList from './Components/ToDoList';
-import ToDoLoader from './Components/ToDoLoader';
-import ToDoMain from './Components/ToDoMain';
-import ToDoSearch from './Components/ToDoSearch';
-import useTodos from './Hooks/useTodos';
-import './Styles/App.css';
+import { ChangeAlert } from '../Components/ChangeAlert';
+import ToDoAside from '../Components/ToDoAside';
+import ToDoDate from '../Components/ToDoDate';
+import ToDoEmpty from '../Components/ToDoEmpty';
+import ToDoHeader from '../Components/ToDoHeader';
+import ToDoInput from '../Components/ToDoInput';
+import ToDoItem from '../Components/ToDoItem';
+import ToDoList from '../Components/ToDoList';
+import ToDoLoader from '../Components/ToDoLoader';
+import ToDoMain from '../Components/ToDoMain';
+import ToDoSearch from '../Components/ToDoSearch';
+import useTodos from '../Hooks/useTodos';
+import '../Styles/App.css';
 
 function App() {
   const {
