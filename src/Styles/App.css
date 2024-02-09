@@ -6,10 +6,10 @@ body{
 .App {
   text-align: center;
   background-image: url('https://wallpapers.com/images/hd/minimalist-nature-3840-x-2160-e91sxvrut8sj83hr.jpg');
-  background-size: cover;
+  background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  height: 100vh ;
   display: grid;
   justify-content: center;
 }
@@ -19,7 +19,38 @@ body{
   overflow: hidden;
   height: 40rem;
   width: 100vw;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows:650px ; 
+  grid-template-areas: 
+  'main'
+  'aside';
+  grid-template-columns: 1fr;
+}
+
+
+@media (max-width:1231px){
+.containers{
+  height: 35rem;
+  width: 60rem;
+  grid-template-rows:35rem ; /*solo una fila*/
+}
+} 
+
+@media (max-width: 1000px){
+  .containers{
+    height: 30rem;
+    width: 45rem;
+    grid-template-rows: 30rem;
+  }
+}
+@media (max-width: 800px){
+  .Apps{
+    max-height: 100vh;
+  }
+  .containers{
+  height: 80vh;
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  }
 }

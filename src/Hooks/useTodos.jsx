@@ -4,7 +4,12 @@ import useLocalStorage from './useLocalStorage'
 
 const useTodos = (props) => {
 
-  const { item, SaveItem, loading, error } = useLocalStorage('TODOS_V1', [])
+  const { 
+    item,
+    SaveItem,
+    loading,
+    error,
+    SyncItem: SyncToDo } = useLocalStorage('TODOS_V1', [])
 
   const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
@@ -50,7 +55,7 @@ const useTodos = (props) => {
   }
 
   // --- CRUD ---
-  
+
   const addTodo = (text) => {
     // clonar array item
     const newToDo = [...item]
@@ -70,7 +75,7 @@ const useTodos = (props) => {
     const newToDo = [...item];
     if (newToDo[toDoIndex].completed === false) {
       newToDo[toDoIndex].completed = true;
-      console.log("si funciona");
+      // console.log("si funciona");
 
       //actualizar el estado y pasarlo a true
       SaveItem(newToDo);
@@ -79,7 +84,7 @@ const useTodos = (props) => {
       SaveItem(newToDo);
     }
   }
-  
+
   const deleteToDo = (text) => {
     const toDoIndex = item.findIndex(todo => todo.text === text);
     const newToDo = [...item];
@@ -88,21 +93,26 @@ const useTodos = (props) => {
     SaveItem(newToDo);
   }
 
-  return {
-    dateIcon,
-    start,
-    setStart,
-    loading,
+  const states = {
     error,
+    loading,
     search,
-    setSearch,
+    searchedTodo,
     completeToDo,
     completedToDos,
     totalToDos,
-    searchedTodo,
-    deleteToDo,
+    dateIcon,
+    start,
+  }
+
+  const updaters =  {
     addTodo,
+    deleteToDo,
+    setSearch,
+    SyncToDo,
+    setStart,
   };
+  return {states, updaters};
 }
 
 export default useTodos
