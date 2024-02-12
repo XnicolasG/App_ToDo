@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'PPCasa-Regular';
+    src: local('PPCasa-Regular.otf'), url('../fonts/PPCasa-Regular.otf') format('opentype');
+}
 :root{
     --button: #3FB29F;
     --mainBackground: #161618;
@@ -5,79 +9,79 @@
 .Main{
     grid-area: main;
     display: grid;
-    grid-column: 1/ span 2;
-    grid-template-rows: 1.5fr 2fr;
     background-color: var(--mainBackground);
     transition: all 1s;
+    height: 280px;
     width: 100%;
 }
 /* Header */
 .Header{
-    background-image: url('https://preview.redd.it/animated-wallpaper-1920-1080-v0-mthr3x0q3m091.png?auto=webp&s=9c853c670b3538bcfc9a54565abd25623bc50052') ;
-    background-size:75rem;
-    background-size: cover;
-    background-position: center;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-row: 1 / 2;
+    /* grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 10%; */
+    grid-template-areas:
+    'tasks date weather'
+    '. name .'
+    ;
+    color: white;
+    place-items: center;
 }
-
+.counter{
+    grid-area: tasks;
+    font-family: 'PPCasa-Regular', sans-serif;
+    font-size: 22px;
+    letter-spacing:2px;
+}
 .counterLoading{
     opacity: 30%;
 }
 /* ToDoDate */
 .DateContainer{
+    grid-area: date;
     display: grid;
-    grid-column: 2/3;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    grid-template-areas: 
+    'name day'
+    'month month'
+    ;
+    place-items: center;
+    gap: 5px;
 }
-.DateInfo{
-    display: grid;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    grid-template-rows: 3rem 5rem 3rem;
-    color: #eee;
-    gap: 4px;
-    height: 80%;
-}
+
 .DayName{
-    grid-row: 1 / 2;
-    font-weight: lighter;
-    font-size: 100% ;
+    grid-area: name;
 }
 .Day{
-    grid-row: 2/3;
-    font-size: 42px;
+    grid-area: day;
+    /* font-family: 'PPCasa-Regular', sans-serif; */
+    color: var(--button);
+    font-size: 36px;
 }
 .Month{
-    grid-row: 3/4;
-    font-weight: lighter;
-    font-size: 32px;
+    grid-area: month;
+    align-self: start;
 }
-.DateAside{
-    display: grid;
-    place-items: center;
-    width: 70%;   
+
+.contWeather{
+    grid-area: weather;
 }
-.dateIcon{
-    width: 100%;
+
+.username{
+    grid-area: name;
 }
 /* To DO Input */
-.contInput{
+/* .contInput{
     grid-row: 2/3;
     display: grid;
     place-items: center;
-}
-.form{
+} */
+/* .form{
     display: grid;
 }
 .labelForm{
     font-size: 1.3rem;
     color: #eee;
-}
-.inputTodo{
+} */
+/* .inputTodo{
     background: #4b4b5b;
     display: flex;
     place-self: center;
@@ -88,17 +92,17 @@
     border-radius: 8px;
     outline: none;
 
-}
+} */
 /* warning message */
-.noneDisplay{
+/* .noneDisplay{
     visibility: hidden!important;
 }
 .withDisplay{
     visibility: visible ;
     color: tomato;
-}
+} */
 /* StartButton */
-.contButtons{
+/* .contButtons{
     display: grid;
     justify-content: center;
     gap: 3%;
@@ -121,7 +125,7 @@
 }
 .StartButton:active{
     background-color: #1dc962;
-}
+} */
 /* Media query */
 @media(max-width:1000px){
     .StartButton{

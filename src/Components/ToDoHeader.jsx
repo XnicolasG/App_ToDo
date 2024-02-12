@@ -4,7 +4,12 @@ import '../Styles/Main.css'
 const ToDoHeader = ({ children,totalToDos, completedToDos,loading }) => {
     return (
         <header className='Header'>
-            <h1 className={`counter ${!!loading && "counterLoading"}`}>{completedToDos} de {totalToDos} </h1>
+            <section className={`counter ${!!loading && "counterLoading"}`}>
+                <h1>TASKS</h1>
+                <h1>
+                {completedToDos} / {totalToDos} 
+                </h1>
+            </section>
             {children}
         </header>
     )

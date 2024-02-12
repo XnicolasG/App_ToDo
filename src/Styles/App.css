@@ -11,20 +11,15 @@ body{
   background-repeat: no-repeat;
   height: 100vh ;
   display: grid;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .container{
-  border: 2px solid black;
-  border-radius: 30px;
-  overflow: hidden;
-  height: 40rem;
   width: 100vw;
-  min-height: 100vh;
+  height: 60%;
   display: grid;
   grid-template-areas: 
   'main'
   'aside';
-  grid-template-columns: 1fr;
 }
 
 
