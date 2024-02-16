@@ -22,7 +22,7 @@ const ToDoList = (props) => {
     <section className={`${props.className}`}>
       <div>
 
-      <h2 className={sectionTitle()}> {props.title} <Link className='link' title='add To Do' to={'/'} >+</Link> </h2>
+      <h2 className={sectionTitle()}> {props.title} <Link className='link' title='add new task' to={'/'} >+</Link> </h2>
       </div>
       <ul>
         {/* cuando porps.error sea true entonces se lanzara onError() */}
@@ -41,6 +41,7 @@ const ToDoList = (props) => {
 
         {/* Si loading y error son false entonces si renderizaremos los ToDo */}
         {(!props.loading && !props.error) && props.searchedTodo.map(renderFunc)}
+        {console.log(props.searchedTodo)}
 
       </ul>
     </section>

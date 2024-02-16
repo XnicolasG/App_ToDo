@@ -11,14 +11,13 @@
     display: grid;
     background-color: var(--mainBackground);
     transition: all 1s;
-    height: 280px;
+    height: 150px;
     width: 100%;
 }
 /* Header */
 .Header{
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows: 1fr 10%; */
+    grid-template-rows: 60% 20%; 
     grid-template-areas:
     'tasks date weather'
     '. name .'
@@ -28,7 +27,6 @@
 }
 .counter{
     grid-area: tasks;
-    font-family: 'PPCasa-Regular', sans-serif;
     font-size: 22px;
     letter-spacing:2px;
 }
@@ -39,11 +37,13 @@
 .DateContainer{
     grid-area: date;
     display: grid;
+    grid-template-rows: repeat(2, 30px);
     grid-template-areas: 
     'name day'
     'month month'
     ;
-    place-items: center;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
 }
 
@@ -58,7 +58,6 @@
 }
 .Month{
     grid-area: month;
-    align-self: start;
 }
 
 .contWeather{
