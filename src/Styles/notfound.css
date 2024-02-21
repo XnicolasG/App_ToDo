@@ -1,0 +1,84 @@
+.cont{
+  width: 100vw;
+  background-image: url('https://wallpapers.com/images/hd/minimalist-nature-3840-x-2160-e91sxvrut8sj83hr.jpg');
+  background-size:cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  height: 100vh ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header{
+    width: 100%;
+    background: black;
+    color: white;
+    display: grid;
+    justify-items:center;
+    align-items: center;
+    padding: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    'back date sorry'
+    ;
+}
+.back{
+    grid-area: back;
+    text-decoration: none;
+    color:white;
+    font-weight:bold;
+    font-size:larger;
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 4px;
+    padding-inline: 10px;
+    transition: all .5s;
+}   
+.back:hover{
+    scale: 1.1;
+    background: white;
+    color:black;
+}
+/* ToDoDate */
+.DateContainer{
+    grid-area: date;
+    display: grid;
+    grid-template-rows: repeat(2, 30px);
+    grid-template-areas: 
+    'name day'
+    'month day'
+    ;
+    justify-content:space-around;
+    align-items: center;
+    gap: 5px;
+}
+
+.DayName{
+    grid-area: name;
+    border-bottom: 2px solid white;
+}
+.Day{
+    grid-area: day;
+    /* font-family: 'PPCasa-Regular', sans-serif; */
+    color: var(--button);
+    font-size: 60px;
+}
+.Month{
+    grid-area: month;
+}
+.content{
+    background-color: #e3dcdc6a;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    /* width: 60vw; */
+    height: 60vh;
+    display: grid;
+    place-items: center;
+    border-radius:0 0 10px 10px;
+}
+img{
+    max-width: 60%;
+    height: auto;
+    border-radius: 10px;
+}

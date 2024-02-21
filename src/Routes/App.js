@@ -27,7 +27,9 @@ function App() {
     completedToDos,
     totalToDos,
     start,
-    dateIcon,
+    doing,
+    done,
+    // dateIcon,
   } = states
 
   const {
@@ -51,7 +53,7 @@ function App() {
             loading={loading}
           >
             <ToDoDate
-              dateIcon={dateIcon}
+              // dateIcon={dateIcon}
             />
             <Weather />
             <Username />
@@ -113,7 +115,7 @@ function App() {
             error={error}
             loading={loading}
             totalToDos={totalToDos}
-            searchedTodo={searchedTodo}
+            searchedTodo={doing}
             className={'contList2'}
             title={'Doing'}
 
@@ -147,7 +149,7 @@ function App() {
             error={error}
             loading={loading}
             totalToDos={totalToDos}
-            searchedTodo={searchedTodo}
+            searchedTodo={done}
             className={'contList3'}
             title={'Done'}
 

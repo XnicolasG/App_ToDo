@@ -13,7 +13,6 @@ const ToDoList = (props) => {
       return 'green';
     }
   };
-  
     //En caso de que tengamos una render function (que sea true), props.children se activara, de ser
     //una render props(que children sea false y y onRender sea true ) se activara onRender, que de cualquier manera se manejara de manera
     //automatica al cargar estas opciones en renderFunc
@@ -34,10 +33,11 @@ const ToDoList = (props) => {
         {!props.loading && !props.totalToDos && props.onEmpty()}
 
         {/* si totaltodos tiene algo, al usar !! devolvera unicamente true o false, 
-        si es true, y si searchedTodo no tiene nada, etnonces lanzaremos onEmptyResults()
+        si es true, y si searchedTodo no tiene nada, entonces lanzaremos onEmptyResults()
           */}
         {!!props.totalToDos && !props.searchedTodo.length &&
           props.onEmptyResults(props.search)}
+          
 
         {/* Si loading y error son false entonces si renderizaremos los ToDo */}
         {(!props.loading && !props.error) && props.searchedTodo.map(renderFunc)}

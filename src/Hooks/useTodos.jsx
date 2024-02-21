@@ -11,23 +11,15 @@ const useTodos = (props) => {
     error,
     SyncItem: SyncToDo } = useLocalStorage('TODOS_V1', [])
 
-  const [dateIcon, setDateIcon] = useState('')
+  // const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
-  const date = new Date();
-  const Hour = date.getHours();
+  // const date = new Date();
+  // const Hour = date.getHours();
 
   const [search, setSearch] = useState('');
+  const [doing, setDoing] = useState([]);
+  const [done, setDone] = useState([]);
 
-  //--- Header ---
-  useEffect(() => {
-    if (Hour < 12) {
-      setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657211/1888282_obdvdr.png');
-    } else if (Hour < 18) {
-      setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657069/4814268_zzozim.png');
-    } else {
-      setDateIcon('https://res.cloudinary.com/dlkynkfvq/image/upload/v1685657146/7645197_zd91ht.png');
-    }
-  }, [Hour]);
 
   //----- contador de ToDos --
 
@@ -56,18 +48,28 @@ const useTodos = (props) => {
 
   // --- CRUD ---
 
+  const newToDo = [...item]
   const addTodo = (text) => {
     // clonar array item
-    const newToDo = [...item]
     const newId = uuidv4();
     newToDo.push({
       id: newId,
       completed: false,
       text,
+      status: 'ToDo'
     })
     console.log(newId);
     SaveItem(newToDo)
   }
+  useEffect(()=>{
+        if (newToDo.status === 'doing') {
+          setDoing((prevDoing) => [...prevDoing, newToDo]);
+        }else if (newToDo.status === 'done') {
+          setDoing((prevDoing) => prevDoing.filter((todo) => todo.id !== newToDo.id));
+          setDone((prevDone) => [...prevDone, newToDo])
+        }
+        console.log({doing,done});
+  }, [item])
 
   const completeToDo = (text) => {
     //iteracion en item hasta encontrarla coincidencia exacta de text que busco y asi obtener el index
@@ -101,8 +103,10 @@ const useTodos = (props) => {
     completeToDo,
     completedToDos,
     totalToDos,
-    dateIcon,
+    // dateIcon,
     start,
+    doing,
+    done,
   }
 
   const updaters =  {
