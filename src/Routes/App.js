@@ -104,8 +104,9 @@ function App() {
                   key={todo.id}
                   text={todo.text}
                   completed={todo.completed}
-                  OnComplete={() => { completeToDo(todo.text) }}
-                  onDelete={() => { deleteToDo(todo.text) }}
+                  OnComplete={() => { completeToDo(todo.id) }}
+                  onDelete={() => { deleteToDo(todo.id) }}
+                  onEdit={() => console.log('edit')}
                 />
               </>
             )}

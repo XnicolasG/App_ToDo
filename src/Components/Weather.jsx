@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../Styles/Main.css'
+import '../Styles/todoAdd.css'
 import FetchData from '../Hooks/FetchData'
 
 export const Weather = () => {

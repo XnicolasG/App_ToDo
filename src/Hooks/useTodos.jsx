@@ -71,9 +71,9 @@ const useTodos = (props) => {
         console.log({doing,done});
   }, [item])
 
-  const completeToDo = (text) => {
-    //iteracion en item hasta encontrarla coincidencia exacta de text que busco y asi obtener el index
-    const toDoIndex = item.findIndex(todo => todo.text === text);
+  const completeToDo = (id) => {
+    //iteracion en item hasta encontrarla coincidencia exacta de id que busco y asi obtener el index
+    const toDoIndex = item.findIndex(todo => todo.id === id);
     const newToDo = [...item];
     if (newToDo[toDoIndex].completed === false) {
       newToDo[toDoIndex].completed = true;
@@ -87,14 +87,16 @@ const useTodos = (props) => {
     }
   }
 
-  const deleteToDo = (text) => {
-    const toDoIndex = item.findIndex(todo => todo.text === text);
+  const deleteToDo = (id) => {
+    const toDoIndex = item.findIndex(todo => todo.id === id);
     const newToDo = [...item];
     // corto la posición guardada en toDoIndex, y le digo que solo quiero cortar 1 elemento
     newToDo.splice(toDoIndex, 1)
     SaveItem(newToDo);
   }
+const editToDo = () => {
 
+}
   const states = {
     error,
     loading,
