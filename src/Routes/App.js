@@ -13,8 +13,10 @@ import Username from '../Components/Username';
 import { Weather } from '../Components/Weather';
 import useTodos from '../Hooks/useTodos';
 import '../Styles/App.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate()
   const {
     states, updaters
   } = useTodos();
@@ -33,11 +35,10 @@ function App() {
   } = states
 
   const {
-    addTodo,
+    // addTodo,
     deleteToDo,
     setSearch,
     SyncToDo,
-    setStart,
   } = updaters
   return (
     <div className="App">
@@ -106,7 +107,7 @@ function App() {
                   completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.id) }}
                   onDelete={() => { deleteToDo(todo.id) }}
-                  onEdit={() => console.log('edit')}
+                  onEdit={() => navigate(`/edit/${todo.id}`) }
                 />
               </>
             )}
@@ -141,6 +142,7 @@ function App() {
                   completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.text) }}
                   onDelete={() => { deleteToDo(todo.text) }}
+                  onEdit={() => navigate(`/edit/${todo.id}`) }
                 />
               </>
             )}
@@ -175,6 +177,8 @@ function App() {
                   completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.text) }}
                   onDelete={() => { deleteToDo(todo.text) }}
+                  onEdit={() => navigate(`/edit/${todo.id}`) }
+
                 />
               </>
             )}

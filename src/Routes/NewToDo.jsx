@@ -1,10 +1,15 @@
 import React from 'react'
 import ToDoAdd from '../Components/ToDoAdd'
+import useTodos from '../Hooks/useTodos'
 
 const NewToDo = () => {
+  const { updaters } = useTodos();
+  const { addTodo } = updaters;
   return (
     <>
-      <ToDoAdd />
+      <ToDoAdd 
+      submitEvent={(text) => addTodo(text)}
+      />
     </>
   )
 }

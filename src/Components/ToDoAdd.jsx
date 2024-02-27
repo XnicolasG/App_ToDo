@@ -4,12 +4,14 @@ import ToDoDate from './ToDoDate'
 import '../Styles/todoAdd.css'
 import { Weather } from './Weather'
 
-const ToDoAdd = () => {
+const ToDoAdd = (props) => {
     const location = useLocation();
     const navigate = useNavigate()
     const [newValue, setNewValue] = useState('')
+
     const SaveData = (e) => {
         e.preventDefault();
+        props.submitEvent(newValue)
         navigate('/')
     }
     const onChange = (e) =>{
@@ -21,6 +23,7 @@ const ToDoAdd = () => {
     return (
         <section className='cont'>
             <header className='header'>
+                <p>{props.item.status}</p>
                 <Link className='back' to={'/'}>Go Back</Link>
                 <ToDoDate />
                 <div className='contWeatherComp'>
@@ -36,7 +39,7 @@ const ToDoAdd = () => {
                         : 'Want to change somenthing ?'}</h2>
                     <textarea 
                     value={newValue}
-                    onChange={onChange} 
+                    onChange={onChange}
                     />
                     <div className="btns">
 

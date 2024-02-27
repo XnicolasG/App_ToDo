@@ -122,3 +122,6 @@
   .btn:hover{
     scale: 1.1;
   }
+  .btn:active{
+    background: var(--button);
+  }

@@ -4,12 +4,12 @@ import useLocalStorage from './useLocalStorage'
 
 const useTodos = (props) => {
 
-  const { 
+  const {
     item,
     SaveItem,
     loading,
     error,
-    SyncItem: SyncToDo } = useLocalStorage('TODOS_V1', [])
+    SyncItem: SyncToDo } = useLocalStorage('TODOS_V2', [])
 
   // const [dateIcon, setDateIcon] = useState('')
   const [start, setStart] = useState(false)
@@ -49,6 +49,7 @@ const useTodos = (props) => {
   // --- CRUD ---
 
   const newToDo = [...item]
+
   const addTodo = (text) => {
     // clonar array item
     const newId = uuidv4();
@@ -61,14 +62,15 @@ const useTodos = (props) => {
     console.log(newId);
     SaveItem(newToDo)
   }
-  useEffect(()=>{
-        if (newToDo.status === 'doing') {
-          setDoing((prevDoing) => [...prevDoing, newToDo]);
-        }else if (newToDo.status === 'done') {
-          setDoing((prevDoing) => prevDoing.filter((todo) => todo.id !== newToDo.id));
-          setDone((prevDone) => [...prevDone, newToDo])
-        }
-        console.log({doing,done});
+
+  useEffect(() => {
+    if (newToDo.status === 'doing') {
+      setDoing((prevDoing) => [...prevDoing, newToDo]);
+    } else if (newToDo.status === 'done') {
+      setDoing((prevDoing) => prevDoing.filter((todo) => todo.id !== newToDo.id));
+      setDone((prevDone) => [...prevDone, newToDo])
+    }
+    console.log({ doing, done, item });
   }, [item])
 
   const completeToDo = (id) => {
@@ -94,9 +96,14 @@ const useTodos = (props) => {
     newToDo.splice(toDoIndex, 1)
     SaveItem(newToDo);
   }
-const editToDo = () => {
 
-}
+  const editToDo = ( id, newText ) => {
+    const toDoIndex = item.findIndex(todo => todo.id === id);
+    const newToDo = [...item];
+    newToDo[toDoIndex].text = newText;
+    // newToDo[toDoIndex].status = newStatus;
+    SaveItem(newToDo);
+  }
   const states = {
     error,
     loading,
@@ -109,16 +116,18 @@ const editToDo = () => {
     start,
     doing,
     done,
+    item
   }
 
-  const updaters =  {
+  const updaters = {
     addTodo,
+    editToDo,
     deleteToDo,
     setSearch,
     SyncToDo,
     setStart,
   };
-  return {states, updaters};
+  return { states, updaters };
 }
 
 export default useTodos
