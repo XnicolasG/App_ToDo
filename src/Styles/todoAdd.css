@@ -23,6 +23,19 @@
       'back date weather'
       ;
   }
+  .headerLoading{
+    width: 100%;
+      background: black;
+      color: white;
+      display: grid;
+      justify-items:center;
+      align-items: center;
+      padding: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: 
+      ' date weather'
+      ;
+  }
   .back{
       grid-area: back;
       text-decoration: none;
@@ -124,4 +137,7 @@
   }
   .btn:active{
     background: var(--button);
+  }
+  .cancel:active{
+    background:tomato ;
   }

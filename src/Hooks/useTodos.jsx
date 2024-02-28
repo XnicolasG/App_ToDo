@@ -72,7 +72,10 @@ const useTodos = (props) => {
     }
     console.log({ doing, done, item });
   }, [item])
-
+  const getItem = (id) => {
+    const toDoIndex = item.findIndex(todo => todo.id === id);
+    return item[toDoIndex];
+  }
   const completeToDo = (id) => {
     //iteracion en item hasta encontrarla coincidencia exacta de id que busco y asi obtener el index
     const toDoIndex = item.findIndex(todo => todo.id === id);
@@ -112,6 +115,7 @@ const useTodos = (props) => {
     completeToDo,
     completedToDos,
     totalToDos,
+    getItem,
     // dateIcon,
     start,
     doing,
