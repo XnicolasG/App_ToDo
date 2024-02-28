@@ -15,8 +15,10 @@ const ToDoItem = (props) => {
         >
           {props.text}
         </p>
+        <div className="options">
         <span className='editItem' onClick={props.onEdit} >✏️</span>
-        <span className='eraseItem' onClick={props.onDelete}>X</span>
+        <span className='eraseItem' onClick={props.onDelete}>🗑️</span>
+        </div>
       </li>
     </>
   )

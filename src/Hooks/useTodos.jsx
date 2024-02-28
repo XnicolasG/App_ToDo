@@ -17,9 +17,6 @@ const useTodos = (props) => {
   // const Hour = date.getHours();
 
   const [search, setSearch] = useState('');
-  const [doing, setDoing] = useState([]);
-  const [done, setDone] = useState([]);
-
 
   //----- contador de ToDos --
 
@@ -28,24 +25,45 @@ const useTodos = (props) => {
   const totalToDos = item.length;
 
   // --- Metodo para filtrar por medio del buscador ---
-
-  let searchedTodo = [];
-
-  //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
-  if (!search.length >= 1) {
-    searchedTodo = item
-    // pero si SI es mayor o igual a 1..   
-  } else {
-    searchedTodo = item.filter(todo => {
-      // pasar string la lista de ToDos a minuscula
-      const todoText = todo.text.toLowerCase();
-      // pasar a minuscula el string en el input de busqueda
-      const searchText = search.toLowerCase();
-      // devolver el valor DENTRO de item que incluya alguna coincidencia con la busqueda, asi sea de una sola letra
-      return todoText.includes(searchText);
-    })
+  // let searchedTodo = [];
+  const filterByStatus = (status) => {
+    return item.filter(todo => todo.status === status);
   }
+  let searchedTodo ;
+  let doing ;
+  let done ;
 
+  if (search.length >= 1) {
+    const searchText = search.toLowerCase();
+
+    searchedTodo = filterByStatus('ToDo').filter(todo => todo.text.toLowerCase().includes(searchText));
+    doing = filterByStatus('doing').filter(todo => todo.text.toLowerCase().includes(searchText));
+    done = filterByStatus('done').filter(todo => todo.text.toLowerCase().includes(searchText));
+   
+  } else {
+    searchedTodo = filterByStatus('ToDo');
+    doing = filterByStatus('doing');
+    done = filterByStatus('done');
+    
+  }
+  console.log({ searchedTodo, doing, done });
+
+  /*
+    //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
+    if (!search.length >= 1) {
+      searchedTodo = item
+      // pero si SI es mayor o igual a 1..   
+    } else {
+      searchedTodo = item.filter(todo => {
+        // pasar string la lista de ToDos a minuscula
+        const todoText = todo.text.toLowerCase();
+        // pasar a minuscula el string en el input de busqueda
+        const searchText = search.toLowerCase();
+        // devolver el valor DENTRO de item que incluya alguna coincidencia con la busqueda, asi sea de una sola letra
+        return todoText.includes(searchText);
+      })
+    }
+    */
   // --- CRUD ---
 
   const newToDo = [...item]
@@ -63,15 +81,8 @@ const useTodos = (props) => {
     SaveItem(newToDo)
   }
 
-  useEffect(() => {
-    if (newToDo.status === 'doing') {
-      setDoing((prevDoing) => [...prevDoing, newToDo]);
-    } else if (newToDo.status === 'done') {
-      setDoing((prevDoing) => prevDoing.filter((todo) => todo.id !== newToDo.id));
-      setDone((prevDone) => [...prevDone, newToDo])
-    }
-    console.log({ doing, done, item });
-  }, [item])
+
+
   const getItem = (id) => {
     const toDoIndex = item.findIndex(todo => todo.id === id);
     return item[toDoIndex];
@@ -100,7 +111,7 @@ const useTodos = (props) => {
     SaveItem(newToDo);
   }
 
-  const editToDo = ( id, newText ) => {
+  const editToDo = (id, newText) => {
     const toDoIndex = item.findIndex(todo => todo.id === id);
     const newToDo = [...item];
     newToDo[toDoIndex].text = newText;
@@ -117,9 +128,9 @@ const useTodos = (props) => {
     totalToDos,
     getItem,
     // dateIcon,
-    start,
     doing,
     done,
+    start,
     item
   }
 
