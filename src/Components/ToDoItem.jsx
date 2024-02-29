@@ -5,11 +5,6 @@ const ToDoItem = (props) => {
   return (
     <>
     <li className='contItem'>
-        <input type="checkbox"
-          id="checkItem"
-          onClick={props.OnComplete}
-          defaultChecked={props.completed}
-        />
         <p
           className={` toDoCheck ${props.completed ? 'toDoUndo': ''}`}
         >

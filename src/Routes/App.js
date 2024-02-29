@@ -31,6 +31,8 @@ function App() {
     start,
     doing,
     done,
+    totalDone, 
+    pendigTasks
     // dateIcon,
   } = states
 
@@ -49,8 +51,8 @@ function App() {
           start={start}
         >
           <ToDoHeader
-            totalToDos={totalToDos}
-            completedToDos={completedToDos}
+            totalToDos={pendigTasks}
+            completedToDos={totalDone}
             loading={loading}
           >
             <ToDoDate
@@ -104,7 +106,6 @@ function App() {
                 <ToDoItem
                   key={todo.id}
                   text={todo.text}
-                  completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.id) }}
                   onDelete={() => { deleteToDo(todo.id) }}
                   onEdit={() => navigate(`/edit/${todo.id}`) }
@@ -139,7 +140,6 @@ function App() {
                 <ToDoItem
                   key={todo.id}
                   text={todo.text}
-                  completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.text) }}
                   onDelete={() => { deleteToDo(todo.text) }}
                   onEdit={() => navigate(`/edit/${todo.id}`) }
@@ -174,7 +174,6 @@ function App() {
                 <ToDoItem
                   key={todo.id}
                   text={todo.text}
-                  completed={todo.completed}
                   OnComplete={() => { completeToDo(todo.text) }}
                   onDelete={() => { deleteToDo(todo.text) }}
                   onEdit={() => navigate(`/edit/${todo.id}`) }

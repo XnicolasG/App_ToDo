@@ -141,3 +141,38 @@
   .cancel:active{
     background:tomato ;
   }
+  .statusOption{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-self: center;
+    margin-block: 1%;
+    width: 50%;
+  }
+  .btnStatus{
+    font-size: large;
+    padding-inline: 4%;
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid whitesmoke;
+    color: white;
+    transition: all .5s;
+  }
+  .btnStatus:hover{
+    scale: 1.05;
+  }
+  .red::before{
+    content:'◼ ' ;
+    color: tomato;
+  }
+  .yellow::before{
+    content:'◼ ' ;
+    color: rgb(255, 163, 71);
+  }
+  .green::before{
+    content:'◼ ' ;
+    color: rgb(71, 255, 145);
+  }
+  .disable{
+    opacity: .6;
+  }

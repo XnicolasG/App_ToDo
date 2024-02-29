@@ -32,13 +32,15 @@ const ToDoList = (props) => {
           {props.loading && props.onLoading()}
 
           {/* si loading es False y totalTodos esa vacio entonces lanzara onEmpty() */}
-          {!props.loading && !props.totalToDos && props.onEmpty()}
+          {!props.loading && !props.searchedTodo && props.onEmpty()}
 
           {/* si totaltodos tiene algo, al usar !! devolvera unicamente true o false, 
         si es true, y si searchedTodo no tiene nada, entonces lanzaremos onEmptyResults()
       */}
           {!!props.totalToDos && !props.searchedTodo.length &&
             props.onEmptyResults(props.search)}
+          
+
 
 
           {/* Si loading y error son false entonces si renderizaremos los ToDo */}

@@ -23,7 +23,7 @@ const useTodos = (props) => {
   //!! se niega la negación sin embargo esto garantiza estar trabajando con valor bool puro y que no traiga otro tipo de valor y genere errores
   const completedToDos = item.filter(todo => !!todo.completed).length;
   const totalToDos = item.length;
-
+  
   // --- Metodo para filtrar por medio del buscador ---
   // let searchedTodo = [];
   const filterByStatus = (status) => {
@@ -32,37 +32,29 @@ const useTodos = (props) => {
   let searchedTodo ;
   let doing ;
   let done ;
-
+  
+  
+  
   if (search.length >= 1) {
     const searchText = search.toLowerCase();
-
+    
     searchedTodo = filterByStatus('ToDo').filter(todo => todo.text.toLowerCase().includes(searchText));
     doing = filterByStatus('doing').filter(todo => todo.text.toLowerCase().includes(searchText));
     done = filterByStatus('done').filter(todo => todo.text.toLowerCase().includes(searchText));
-   
+    
   } else {
     searchedTodo = filterByStatus('ToDo');
     doing = filterByStatus('doing');
-    done = filterByStatus('done');
-    
+    done = filterByStatus('done');  
   }
-  console.log({ searchedTodo, doing, done });
+  const totalTodo = searchedTodo.length;
+  const totalDoing = doing.length;
+  const totalDone = done.length;
+  let pendigTasks = totalTodo + totalDoing + totalDone
+  console.log({ doing,totalTodo, totalDoing, totalDone, pendigTasks });
 
   /*
     //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item
-    if (!search.length >= 1) {
-      searchedTodo = item
-      // pero si SI es mayor o igual a 1..   
-    } else {
-      searchedTodo = item.filter(todo => {
-        // pasar string la lista de ToDos a minuscula
-        const todoText = todo.text.toLowerCase();
-        // pasar a minuscula el string en el input de busqueda
-        const searchText = search.toLowerCase();
-        // devolver el valor DENTRO de item que incluya alguna coincidencia con la busqueda, asi sea de una sola letra
-        return todoText.includes(searchText);
-      })
-    }
     */
   // --- CRUD ---
 
@@ -111,10 +103,12 @@ const useTodos = (props) => {
     SaveItem(newToDo);
   }
 
-  const editToDo = (id, newText) => {
+  const editToDo = (id, newText, newStatus) => {
     const toDoIndex = item.findIndex(todo => todo.id === id);
     const newToDo = [...item];
     newToDo[toDoIndex].text = newText;
+    newToDo[toDoIndex].status = newStatus;
+
     // newToDo[toDoIndex].status = newStatus;
     SaveItem(newToDo);
   }
@@ -131,7 +125,9 @@ const useTodos = (props) => {
     doing,
     done,
     start,
-    item
+    item,
+    totalDone, 
+    pendigTasks
   }
 
   const updaters = {
