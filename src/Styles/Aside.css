@@ -120,14 +120,13 @@
     background-color: #efe8e86a;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-    box-shadow: 2px 2px 6px #5f626694, -8px -8px 10px  #c5c5c56a;
+    box-shadow: 2px 2px 6px #5f626694, -2px -2px 8px 2px #6f6e6e6a;
     border: 3px solid transparent;
-
+    transition: all .5s ease-out ;
   }
   .contItem:hover{
     /* transform: scale(1.02); */
     border: 3px solid grey;
-    transition: transform 2s ease-out ;
   }
   .link{
     text-decoration: none;

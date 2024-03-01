@@ -87,6 +87,7 @@ function App() {
             searchedTodo={searchedTodo}
             className={'contList'}
             title={'To Do'}
+            defaultState={'ToDo'}
 
             onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
@@ -108,7 +109,12 @@ function App() {
                   text={todo.text}
                   OnComplete={() => { completeToDo(todo.id) }}
                   onDelete={() => { deleteToDo(todo.id) }}
-                  onEdit={() => navigate(`/edit/${todo.id}`) }
+                  onEdit={() => {
+                    navigate(`/edit/${todo.id}`,
+                    {
+                      state: {todo}
+                    });
+                   }}
                 />
               </>
             )}
@@ -121,6 +127,7 @@ function App() {
             searchedTodo={doing}
             className={'contList2'}
             title={'Doing'}
+            defaultState={'doing'}
 
             onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
@@ -155,6 +162,7 @@ function App() {
             searchedTodo={done}
             className={'contList3'}
             title={'Done'}
+            defaultState={'done'}
 
             onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
             onLoading={() => Array.from({ length: 4 }).map((index) => (
