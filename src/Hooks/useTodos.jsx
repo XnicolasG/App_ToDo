@@ -9,6 +9,7 @@ const useTodos = (props) => {
     SaveItem,
     loading,
     error,
+    UpdateItem,
     SyncItem: SyncToDo } = useLocalStorage('TODOS_V2', [])
 
   // const [dateIcon, setDateIcon] = useState('')
@@ -137,6 +138,7 @@ const useTodos = (props) => {
     setSearch,
     SyncToDo,
     setStart,
+    UpdateItem
   };
   return { states, updaters };
 }

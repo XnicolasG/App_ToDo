@@ -23,7 +23,10 @@ function useLocalStorage(itemName, initialValue) {
   const onSincronize = ()=>dispatch({ 
     type: actionTypes.sincronize 
   });
-
+  const UpdateItem = (newitem) =>dispatch({
+    type:actionTypes.update_item,
+    payload:newitem
+  })
   useEffect(()=>{
       setTimeout( ()=>{
       try {
@@ -52,6 +55,8 @@ function useLocalStorage(itemName, initialValue) {
       onError(error);
     }
   };
+
+
   const SyncItem = () =>{
       onSincronize();
   }
@@ -62,6 +67,7 @@ function useLocalStorage(itemName, initialValue) {
       loading,
       error,
       SyncItem,
+      UpdateItem
   };
 }
 
@@ -76,6 +82,7 @@ const actionTypes = {
   error: 'ERROR',
   success: 'SUCCESS',
   save: 'SAVE',
+  update:'UPDATE',
   sincronize: 'SINCRONIZE',
 }
 
@@ -94,6 +101,10 @@ const reducerObject = (state, payload) =>({
   [actionTypes.save]:{
       ...state,
       item:payload
+  },
+  [actionTypes.update]:{
+    ...state,
+    item:payload,
   },
   [actionTypes.sincronize]:{
       ...state,
