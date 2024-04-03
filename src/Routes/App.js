@@ -13,8 +13,9 @@ import { Weather } from '../Components/Weather';
 import useTodos from '../Hooks/useTodos';
 import '../Styles/App.css';
 import { useNavigate } from 'react-router-dom';
-import { DndContext, closestCorners, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, closestCorners, MouseSensor, TouchSensor, useSensor, useSensors, closestCenter } from '@dnd-kit/core';
 import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
+import { SortableItem } from '../Components/SortableItem';
 function App() {
   const navigate = useNavigate()
   const {
@@ -32,7 +33,8 @@ function App() {
     doing,
     done,
     totalDone,
-    pendigTasks
+    pendigTasks,
+    item
     // dateIcon,
   } = states
 
@@ -44,12 +46,24 @@ function App() {
     UpdateItem
   } = updaters
 
-
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
   )
 
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (active?.id !== over?.id) {
+      UpdateItem((ite) =>{
+        const oldIndex = ite.indexOf(active.id);
+        const newIndex = ite.indexOf(over.id);
+        return arrayMove(item, oldIndex, newIndex);
+      })
+
+      // UpdateItem({ oldIndex, newIndex }, over?.id)
+      console.log(event);
+    }
+  }
   return (
     <div className="App">
 
@@ -76,30 +90,26 @@ function App() {
           /> */}
         </ToDoMain>
 
-        <DndContext
-          sensors={sensors}
-        >
 
-          <ToDoAside
-            search={search}
+        <ToDoAside
+          search={search}
+        >
+          {totalToDos > 0 ?
+            <ToDoSearch
+              // search={search}
+              setSearch={setSearch}
+              loading={loading}
+            />
+            : <div></div>
+          }
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
           >
-            {totalToDos > 0 ?
-              <ToDoSearch
-                // search={search}
-                setSearch={setSearch}
-                loading={loading}
-              />
-              : <div></div>
-            }
             <SortableContext
-              items={searchedTodo}
+              items={item}
               strategy={rectSortingStrategy}
-              onDragEnd={({ active, over }) => {
-                if (active.id !== over.id) {
-                  const reorderedItems = arrayMove(searchedTodo, active.id, over.id)
-                  UpdateItem(reorderedItems);
-                }
-              }}
             >
 
               <ToDoList
@@ -127,32 +137,22 @@ function App() {
                 }
                 onRender={todo => (
                   <>
-                    <ToDoItem
-                      key={todo.id}
-                      text={todo.text}
-                      OnComplete={() => { completeToDo(todo.id) }}
-                      onDelete={() => { deleteToDo(todo.id) }}
-                      onEdit={() => {
-                        navigate(`/edit/${todo.id}`,
-                          {
-                            state: { todo }
-                          });
-                      }}
-                    />
+                      <ToDoItem
+                        key={todo.id}
+                        text={todo.text}
+                        OnComplete={() => { completeToDo(todo.id) }}
+                        onDelete={() => { deleteToDo(todo.id) }}
+                        onEdit={() => {
+                          navigate(`/edit/${todo.id}`,
+                            {
+                              state: { todo }
+                            });
+                        }}
+                      />
                   </>
                 )}
               />
-            </SortableContext>
-            <SortableContext
-              items={doing}
-              strategy={rectSortingStrategy}
-              onDragEnd={({ active, over }) => {
-                if (active.id !== over.id) {
-                  const reorderedItems = arrayMove(doing, active.id, over.id)
-                  UpdateItem(reorderedItems);
-                }
-              }}
-            >
+
 
               <ToDoList
                 //render props
@@ -179,81 +179,68 @@ function App() {
                 }
                 onRender={todo => (
                   <>
-                    <ToDoItem
-                      key={todo.id}
-                      text={todo.text}
-                      OnComplete={() => { completeToDo(todo.text) }}
-                      onDelete={() => { deleteToDo(todo.text) }}
-                      onEdit={() => {
-                        navigate(`/edit/${todo.id}`,
-                          {
-                            state: { todo }
-                          });
-                      }}
-                    />
+                      <ToDoItem
+                        key={todo.id}
+                        text={todo.text}
+                        OnComplete={() => { completeToDo(todo.text) }}
+                        onDelete={() => { deleteToDo(todo.text) }}
+                        onEdit={() => {
+                          navigate(`/edit/${todo.id}`,
+                            {
+                              state: { todo }
+                            });
+                        }}
+                      />
+                  </>
+                )}
+              />
+              <ToDoList
+                //render props
+                error={error}
+                loading={loading}
+                totalToDos={totalToDos}
+                searchedTodo={done}
+                className={'contList3'}
+                title={'Done'}
+                defaultState={'done'}
+
+                onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
+                onLoading={() => Array.from({ length: 4 }).map((index) => (
+                  <ToDoLoader key={index} />
+                ))}
+                onEmpty={() => <ToDoEmpty />}
+                onEmptyResults={(search) =>
+                  <div className='contEmpty'>
+                    <p className='emptyMessage'>No encontramos coincidencia alguna con <span>"{search}"</span></p>
+                    <div className='emptyImg'>
+                      <img alt='empty' src='https://res.cloudinary.com/dlkynkfvq/image/upload/v1696544445/query_xg1kug.png' />
+                    </div>
+                  </div>
+                }
+                onRender={todo => (
+                  <>
+                      <ToDoItem
+                        key={todo.id}
+                        text={todo.text}
+                        OnComplete={() => { completeToDo(todo.text) }}
+                        onDelete={() => { deleteToDo(todo.text) }}
+                        onEdit={() => {
+                          navigate(`/edit/${todo.id}`,
+                            {
+                              state: { todo }
+                            });
+                        }}
+                      />
                   </>
                 )}
               />
             </SortableContext>
-            <SortableContext
-              items={done}
-              strategy={rectSortingStrategy}
-              onDragEnd={({active,over})=>{
-                if (active.id !== over.id){
-                  const reorderedItems = arrayMove(done,active.id, over.id)
-                  UpdateItem(reorderedItems);
-                }
-              }}
-            >
-
-            <ToDoList
-              //render props
-              error={error}
-              loading={loading}
-              totalToDos={totalToDos}
-              searchedTodo={done}
-              className={'contList3'}
-              title={'Done'}
-              defaultState={'done'}
-
-              onError={() => <p>Se Genero un Error</p>} //FALTAN ESTILOS PARA ERROR
-              onLoading={() => Array.from({ length: 4 }).map((index) => (
-                <ToDoLoader key={index} />
-              ))}
-              onEmpty={() => <ToDoEmpty />}
-              onEmptyResults={(search) =>
-                <div className='contEmpty'>
-                  <p className='emptyMessage'>No encontramos coincidencia alguna con <span>"{search}"</span></p>
-                  <div className='emptyImg'>
-                    <img alt='empty' src='https://res.cloudinary.com/dlkynkfvq/image/upload/v1696544445/query_xg1kug.png' />
-                  </div>
-                </div>
-              }
-              onRender={todo => (
-                <>
-                  <ToDoItem
-                    key={todo.id}
-                    text={todo.text}
-                    OnComplete={() => { completeToDo(todo.text) }}
-                    onDelete={() => { deleteToDo(todo.text) }}
-                    onEdit={() => {
-                      navigate(`/edit/${todo.id}`,
-                      {
-                        state: { todo }
-                      });
-                    }}
-                    
-                    />
-                </>
-              )}
-              />
-              </SortableContext>
-            {/* <ToDoList></ToDoList> */}
-            <ChangeAlert
-              SyncToDo={SyncToDo}
-            />
-          </ToDoAside>
-        </DndContext>
+          </DndContext>
+          {/* <ToDoList></ToDoList> */}
+          <ChangeAlert
+            SyncToDo={SyncToDo}
+          />
+        </ToDoAside>
       </section>
     </div>
   );

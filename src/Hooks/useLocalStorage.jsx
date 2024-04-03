@@ -1,3 +1,4 @@
+import { arrayMove } from '@dnd-kit/sortable';
 import { useEffect, useReducer,} from 'react'
 
 function useLocalStorage(itemName, initialValue) {
@@ -23,9 +24,9 @@ function useLocalStorage(itemName, initialValue) {
   const onSincronize = ()=>dispatch({ 
     type: actionTypes.sincronize 
   });
-  const UpdateItem = (newitem) =>dispatch({
-    type:actionTypes.update_item,
-    payload:newitem
+  const UpdateItem = (newitem,destinationStatus) =>dispatch({
+    type:actionTypes.update,
+    payload:{newitem,destinationStatus},
   })
   useEffect(()=>{
       setTimeout( ()=>{
@@ -104,7 +105,15 @@ const reducerObject = (state, payload) =>({
   },
   [actionTypes.update]:{
     ...state,
-    item:payload,
+    item: arrayMove(state.item, payload.oldIndex, payload.newIndex).map((item, index) => {
+      if (index === payload.newIndex) {
+        return {
+          ...item,
+          status: payload.destinationStatus,
+        };
+      }
+      return item;
+    }),
   },
   [actionTypes.sincronize]:{
       ...state,

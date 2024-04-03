@@ -52,7 +52,7 @@ const useTodos = (props) => {
   const totalDoing = doing.length;
   const totalDone = done.length;
   let pendigTasks = totalTodo + totalDoing + totalDone
-  console.log({ doing,totalTodo, totalDoing, totalDone, pendigTasks });
+  console.log({ item });
 
   /*
     //si la longitud de estado search NO es mayor o igual a 1, entonces searchedTodo sera igual a lo que tenga guardado estado item

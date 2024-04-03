@@ -115,6 +115,7 @@
 }
 .username{
     grid-area: name;
+    color: transparent;
 }
 /* To DO Input */
 /* .contInput{
